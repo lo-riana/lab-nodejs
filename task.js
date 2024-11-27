@@ -22,6 +22,7 @@ app.post('/add', (req, res) => {
     const sql = `INSERT INTO users (name, email) VALUES (?, ?)`;
     dbCon.query(sql, [name, email], (err, result) => {
         if (err) throw err;
+        console.log(`User added: ${name}, ${email}`);
         res.send('User added successfully!');
     });
 });
@@ -30,6 +31,7 @@ app.get('/records', (req, res) => {
     const sql = `SELECT * FROM users`;
     dbCon.query(sql, (err, results) => {
         if (err) throw err;
+        console.log(results);
         res.json(results);
     });
 });
@@ -42,8 +44,7 @@ app.get('/record/:id', (req, res) => {
     });
 });
 
-
 const PORT = 3000;
 app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}/add`);
+    console.log(`Server is running on http://localhost:${PORT}`);
 });
